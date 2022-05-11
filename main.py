@@ -6,6 +6,22 @@ from xml.dom.minidom import Document
 directorio_actual = Path.cwd()
 ruta_actual = Path(directorio_actual)
 
+def menu():
+    print ('¿Qué desea hacer?')
+    print ('1) Listar documentos')
+    print ('2) Leer documento')
+    print ('3) Eliminar documento') 
+    print ('4) Terminar consulta') 
+
+def validacion_opciones():
+    while True:
+        entrada = input('Ingrese el número de la opción: ')
+        try:
+            entrada = int(entrada)
+            return entrada;
+        except ValueError:
+            print ("La entrada es incorrecta; escribe un numero entero")
+
 def listar_documentos():
     for documento in ruta_actual.iterdir():
     
@@ -25,13 +41,8 @@ def eliminar_documento():
     ruta_documento = directorio_actual / nombre
     os.remove(ruta_documento)
 
-print ('¿Qué desea hacer?')
-print ('1) Listar documentos')
-print ('2) Leer documento')
-print ('3) Eliminar documento') 
-print ('4) Terminar consulta') 
-
-eleccion = int(input('Ingrese el número de la opción:'))
+menu()
+eleccion = validacion_opciones()
 
 while eleccion:
     if eleccion == 1:
@@ -43,4 +54,5 @@ while eleccion:
     elif eleccion == 4:
         print ('Fin de la consulta')
         break
-    eleccion = int(input('Ingrese el número de la opción:'))
+    menu()
+    eleccion = validacion_opciones()
